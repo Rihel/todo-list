@@ -1,0 +1,83 @@
+<div class="form-wrapper">
+
+    <form
+        #registerForm
+        class="form"
+        [formGroup]="form"
+        nz-form
+    >
+        <nz-divider nzText="登录"></nz-divider>
+        <nz-form-item>
+            <nz-form-control
+                [nzErrorTip]="accountErrorTpl"
+                nzHasFeedback
+                nzValidatingTip="校验中"
+            >
+                <nz-input-group nzPrefixIcon="user">
+                    <input
+                        nz-input
+                        id="account"
+                        formControlName="account"
+                        name="account"
+                        placeholder="请输入用户名"
+                    >
+                </nz-input-group>
+            </nz-form-control>
+
+            <ng-template
+                #accountErrorTpl
+                let-control
+            >
+                <ng-container *ngIf="control.hasError('required')">账号不能为空</ng-container>
+
+            </ng-template>
+
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control
+                [nzErrorTip]="passwordErrorTpl"
+                nzHasFeedback
+                nzValidatingTip="校验中"
+            >
+                <nz-input-group nzPrefixIcon="lock">
+                    <input
+                        nz-input
+                        formControlName="password"
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder="请输入密码"
+                    >
+                </nz-input-group>
+            </nz-form-control>
+            <ng-template
+                #passwordErrorTpl
+                let-control
+            >
+                <ng-container *ngIf="control.hasError('required')">密码不能为空</ng-container>
+
+            </ng-template>
+
+        </nz-form-item>
+        <nz-form-item>
+            <button
+                nz-button
+                nzType="primary"
+                nzBlock
+                (click)="submit()"
+            >
+                登录
+            </button>
+        </nz-form-item>
+        <nz-form-item>
+            <button
+                nz-button
+                nzBlock
+                (click)="goRegister()"
+            >
+                立即注册
+            </button>
+        </nz-form-item>
+    </form>
+
+</div>

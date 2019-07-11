@@ -1,0 +1,9 @@
+<div class="feedback">
+    <i
+        [ngClass]="{'success': status === 'success', 'error': status === 'error'}"
+        nz-icon
+        [nzType]="status === 'success' ? 'check-circle' : 'close-circle'"
+    ></i>
+    <h2>{{title}}</h2>
+    <p>{{message}}</p>
+</div>

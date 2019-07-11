@@ -1,0 +1,20 @@
+<form
+    nz-form
+    [formGroup]="form"
+>
+    <nz-form-item>
+        <nz-form-label>是否需要通知</nz-form-label>
+        <nz-form-control>
+            <label
+                nz-checkbox
+                formControlName="isNotify"
+            ></label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>通知时间</nz-form-label>
+        <nz-form-control>
+            <nz-time-picker formControlName="time"></nz-time-picker>
+        </nz-form-control>
+    </nz-form-item>
+</form>

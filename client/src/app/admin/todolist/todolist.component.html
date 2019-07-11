@@ -1,0 +1,100 @@
+<div
+    nz-row
+    nzType="flex"
+    nzJustify="center"
+    class="todo-header"
+>
+    <div
+        nz-col
+        nzSpan="8"
+    >
+        <input
+            type="text"
+            nz-input
+            placeholder="请输入任务名称"
+            [(ngModel)]="newTodoName"
+            (keydown)="addTodo($event)"
+        >
+    </div>
+</div>
+<nz-table
+    #table
+    nzSize="small"
+    nzShowSizeChanger
+    [nzLoading]="loading"
+    [nzTotal]="pager.total"
+    [nzFrontPagination]="false"
+    [nzData]="todoList"
+    [nzPageIndex]="pager.page"
+    [nzPageSize]="pager.pageSize"
+    (nzPageIndexChange)="pageChange($event)"
+    (nzPageSizeChange)="pageSizeChange($event)"
+>
+    <thead>
+        <tr>
+            <th>任务名称</th>
+            <th>状态</th>
+            <th>完成时间</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let todo of table.data">
+            <td>{{todo.name}}</td>
+            <td>
+                <nz-tag [nzColor]="todo.status === 0 ? 'magenta' : 'lime'">{{todo.status | todostatus}}</nz-tag>
+            </td>
+            <td>
+                {{todo.complteTime | date:'yyy-MM-dd HH:mm:ss'}}
+            </td>
+            <td>
+                {{todo.createdAt | date:'yyy-MM-dd HH:mm:ss'}}
+            </td>
+            <td>
+                <ng-container *ngIf="todo.status === 0">
+                    <button
+                        nz-button
+                        nzType="primary"
+                        nzSize="small"
+                        (click)="completeTodo(todo.id)"
+                    >
+                        完成
+                    </button>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <button
+                        nz-button
+                        nzType="default"
+                        nzSize="small"
+                        (click)="openModal(todo)"
+                    >
+                        修改
+                    </button>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <button
+                        nz-button
+                        nzType="danger"
+                        nzSize="small"
+                        (click)="deleteTodo(todo.id)"
+                    >
+                        删除
+                    </button>
+                </ng-container>
+
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<nz-modal
+    [(nzVisible)]="visible"
+    nzTitle="修改"
+    (nzOnOk)="updateTodo()"
+    (nzOnCancel)="closeModal()"
+>
+    <input
+        type="text"
+        nz-input
+        [(ngModel)]="currentTodo.name"
+    >
+</nz-modal>

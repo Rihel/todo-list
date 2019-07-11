@@ -1,0 +1,123 @@
+<div class="form-wrapper">
+
+    <form
+        [formGroup]="form"
+        nz-form
+        class=form
+    >
+        <nz-divider nzText="注册"></nz-divider>
+        <nz-form-item>
+            <nz-form-control
+                [nzValidatingTip]="'校验中'"
+                [nzHasFeedback]="true"
+                [nzErrorTip]="usernameErrorTip"
+            >
+                <nz-input-group [nzPrefixIcon]="'user'">
+                    <input
+                        nz-input
+                        placeholder="请输入用户名"
+                        formControlName="username"
+                    >
+                </nz-input-group>
+            </nz-form-control>
+
+            <ng-template
+                #usernameErrorTip
+                let-control
+            >
+                <ng-container *ngIf="control.hasError('required')">用户名不能为空</ng-container>
+                <ng-container *ngIf="control.hasError('minlength')">用户名长度需要5-16位</ng-container>
+                <ng-container *ngIf="control.hasError('maxlength')">用户名长度需要5-16位</ng-container>
+            </ng-template>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control
+                [nzValidatingTip]="'校验中'"
+                [nzHasFeedback]="true"
+                [nzErrorTip]="passwordErrorTip"
+            >
+                <nz-input-group [nzPrefixIcon]="'lock'">
+                    <input
+                        nz-input
+                        type="password"
+                        placeholder="请输入密码"
+                        formControlName="password"
+                    >
+                </nz-input-group>
+            </nz-form-control>
+            <ng-template
+                #passwordErrorTip
+                let-control
+            >
+                <ng-container *ngIf="control.hasError('required')">密码不能为空</ng-container>
+                <ng-container *ngIf="control.hasError('minlength')">密码长度需要5-16位</ng-container>
+                <ng-container *ngIf="control.hasError('maxlength')">密码长度需要5-16位</ng-container>
+            </ng-template>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control
+                [nzValidatingTip]="'校验中'"
+                [nzHasFeedback]="true"
+                [nzErrorTip]="confirmPasswordErrorTip"
+            >
+                <nz-input-group [nzPrefixIcon]="'lock'">
+                    <input
+                        nz-input
+                        type="password"
+                        placeholder="请输入确认密码"
+                        formControlName="confirmPassword"
+                    >
+                </nz-input-group>
+            </nz-form-control>
+            <ng-template
+                #confirmPasswordErrorTip
+                let-control
+            >
+                <ng-container *ngIf="control.hasError('required')">确认密码不能为空</ng-container>
+                <ng-container *ngIf="control.hasError('confirm')">两次密码不一致</ng-container>
+            </ng-template>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control
+                [nzValidatingTip]="'校验中'"
+                [nzHasFeedback]="true"
+                [nzErrorTip]="emailErrorTip"
+            >
+                <nz-input-group [nzPrefixIcon]="'mail'">
+                    <input
+                        nz-input
+                        placeholder="请输入邮箱地址"
+                        formControlName="email"
+                    >
+                </nz-input-group>
+            </nz-form-control>
+            <ng-template
+                #emailErrorTip
+                let-control
+            >
+                <ng-container *ngIf="control.hasError('required')">邮箱地址不能为空</ng-container>
+                <ng-container *ngIf="control.hasError('email')">邮箱格式不正确</ng-container>
+            </ng-template>
+        </nz-form-item>
+        <nz-form-item>
+            <button
+                nz-button
+                nzType="primary"
+                (click)="submit()"
+                nzBlock
+            >
+                立即注册
+            </button>
+        </nz-form-item>
+        <nz-form-item>
+            <button
+                nz-button
+                nzBlock
+                (click)="goLogin()"
+            >
+                已有账号，立即登录
+            </button>
+        </nz-form-item>
+    </form>
+
+</div>

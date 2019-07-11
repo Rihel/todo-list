@@ -1,0 +1,74 @@
+<nz-layout class="admin">
+
+    <nz-header class="admin-header">
+        <div
+            nz-row
+            nzType="flex"
+            nzJustify="space-between"
+        >
+            <h2>任务管理系统</h2>
+
+            <a
+                nz-dropdown
+                [nzDropdownMenu]="menu"
+            >
+                {{username}}
+                <i
+                    nz-icon
+                    nzType="down"
+                ></i>
+            </a>
+
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu>
+                    <li
+                        (click)="logout()"
+                        nz-menu-item
+                    >
+                        退出
+                    </li>
+                </ul>
+            </nz-dropdown-menu>
+        </div>
+    </nz-header>
+    <nz-layout>
+        <nz-sider>
+            <ul
+                nz-menu
+                nzTheme="dark"
+            >
+                <li
+                    nz-menu-item
+                    nzMatchRouter="true"
+                >
+                    <a [routerLink]="[ '/admin/todoList' ]">
+                        <i
+                            nz-icon
+                            nzType="appstore"
+                        ></i>
+                        任务管理
+                    </a>
+                </li>
+                <li
+                    nz-menu-item
+                    nzMatchRouter="true"
+                >
+                    <a [routerLink]="[ '/admin/setting' ]">
+                        <i
+                            nz-icon
+                            nzType="setting"
+                        ></i>
+                        系统管理
+                    </a>
+
+                </li>
+            </ul>
+        </nz-sider>
+        <nz-content class="admin-content">
+            <div class="admin-content-inner">
+                <router-outlet></router-outlet>
+
+            </div>
+        </nz-content>
+    </nz-layout>
+</nz-layout>
