@@ -1,8 +1,6 @@
 const Koa = require('koa')
 const Bodyparser = require('koa-bodyparser')
-const {
-  accessLogger,
-} = require('./middlewares/logger')
+const { accessLogger } = require('./middlewares/logger')
 const init = require('./lib/init')
 const errorHandler = require('./middlewares/errorHandler')
 const result = require('./middlewares/result')
@@ -13,6 +11,11 @@ const Router = require('koa-router')
 const router = new Router()
 const app = new Koa()
 init(app)
+/**
+ * 1. 全局捕获异常
+ * 2. 日志系统
+ * 3. 配置
+ */
 app.use(result)
 app.use(accessLogger())
 app.use(Bodyparser())
@@ -24,9 +27,12 @@ router.all('*', async ctx => {
   ctx.status = 400
 })
 
+app.use(async ctx => {
+  ctx.body = 'hello world'
+})
+
 app.use(authController.routes()).use(authController.allowedMethods())
 app.use(todoController.routes()).use(todoController.allowedMethods())
-
 
 app.listen(config.port, () => {
   console.log('服务器已启动，访问 http://localhost:' + config.port)
