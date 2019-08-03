@@ -27,10 +27,6 @@ router.all('*', async ctx => {
   ctx.status = 400
 })
 
-app.use(async ctx => {
-  ctx.body = 'hello world'
-})
-
 app.use(authController.routes()).use(authController.allowedMethods())
 app.use(todoController.routes()).use(todoController.allowedMethods())
 

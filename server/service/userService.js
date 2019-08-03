@@ -3,6 +3,7 @@ const sequelize = require('../database')
 const UserModel = require('../database/models/user')
 const ErrorException = require('../exceptions/errorExcepsion')
 const utils = require('../utils')
+const ErrorEnums = require('../enums/ErrorEnum')
 const findUserByUsername = async username => {
   return await UserModel.findOne({
     where: {
@@ -22,7 +23,7 @@ const findUserByEmail = async email => {
 const register = async data => {
   let user = await findUserByUsername(data.username)
   if (user) {
-    throw new ErrorException('用户已存在', 1000)
+    throw new ErrorException(ErrorEnums.USER_NOT_EXIST)
   }
   user = await findUserByEmail(data.email)
   if (user) {

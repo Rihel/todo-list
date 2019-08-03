@@ -1,11 +1,11 @@
 module.exports = {
   port: 1234,
   database: {
-    host: 'localhost',
+    host: '数据库主机',
     port: 3306,
-    name: 'todo_list',
-    username: 'root',
-    password: 'mysql123'
+    name: '数据库名称',
+    username: '数据库账户',
+    password: '数据库密码'
   },
   jwt: {
     secret: 'todolist',
@@ -16,7 +16,7 @@ module.exports = {
     host: 'smtp.163.com',
     port: 465,
     // 授权码
-    authCode: 'lihai19940620',
-    email: 'piter_lee@163.com'
+    authCode: '输入邮箱授权',
+    email: '输入有效地址'
   }
 }
